@@ -1,5 +1,5 @@
 {
-  "name": "babylon-demo",
+  "name": "simple-game-client",
   "version": "0.1.0",
   "description": "Babylon.js Colyseus demo",
   "scripts": {
@@ -28,5 +28,6 @@
     "colyseus.js": "^0.15.0-preview.2",
     "copy-webpack-plugin": "^10.2.4",
     "dotenv-webpack": "^7.0.3"
-  }
+  },
+  "main": "webpack.config.js"
 }
