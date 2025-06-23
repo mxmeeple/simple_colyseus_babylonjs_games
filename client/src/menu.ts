@@ -4,8 +4,8 @@ import { Client } from "colyseus.js";
 
 import Game from './game';
 import { createSkyBox } from "./utils";
+import { GAME_ROOM_NAME } from "shared";
 
-const ROOM_NAME = "my_room";
 const ENDPOINT = "ws://localhost:2567";
 // const ENDPOINT = "wss://tutorial-babylonjs-server.glitch.me";
 
@@ -22,7 +22,7 @@ export default class Menu {
 
     constructor(canvasElement: string) {
         // Create canvas and engine.
-        this._canvas = document.getElementById(canvasElement) as HTMLCanvasElement;
+        this._canvas = document.getElementById(canvasElement) as unknown as HTMLCanvasElement;
         this._engine = new BABYLON.Engine(this._canvas, true);
     }
 
@@ -115,15 +115,15 @@ export default class Menu {
             switch (method) {
                 case "create":
                     this.swapLoadingMessageBox(true);
-                    game = new Game(this._canvas, this._engine, await this._colyseus.create(ROOM_NAME));
+                    game = new Game(this._canvas, this._engine, await this._colyseus.create(GAME_ROOM_NAME));
                     break;
                 case "join":
                     this.swapLoadingMessageBox(true);
-                    game = new Game(this._canvas, this._engine, await this._colyseus.join(ROOM_NAME));
+                    game = new Game(this._canvas, this._engine, await this._colyseus.join(GAME_ROOM_NAME));
                     break;
                 default:
                     this.swapLoadingMessageBox(true);
-                    game = new Game(this._canvas, this._engine, await this._colyseus.joinOrCreate(ROOM_NAME));
+                    game = new Game(this._canvas, this._engine, await this._colyseus.joinOrCreate(GAME_ROOM_NAME));
             }
             this._scene.dispose();
             game.bootstrap();
